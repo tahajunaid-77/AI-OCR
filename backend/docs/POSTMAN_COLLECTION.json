@@ -1,0 +1,353 @@
+{
+  "info": {
+    "name": "AI Exam Evaluation System",
+    "description": "API collection for AI Exam Paper Evaluation System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "examId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "submissionId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Exam Management",
+      "item": [
+        {
+          "name": "Create Exam",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Pakistan Studies Mid-Term Exam\",\n  \"subject\": \"Pakistan Studies\",\n  \"totalMarks\": 24,\n  \"questions\": [\n    {\n      \"questionNumber\": 1,\n      \"questionText\": \"Who is known as the founder of Pakistan?\",\n      \"questionType\": \"MCQ\",\n      \"marks\": 2,\n      \"correctAnswer\": \"Quaid-e-Azam Muhammad Ali Jinnah\"\n    },\n    {\n      \"questionNumber\": 2,\n      \"questionText\": \"When was Pakistan created?\",\n      \"questionType\": \"MCQ\",\n      \"marks\": 2,\n      \"correctAnswer\": \"14 August 1947\"\n    },\n    {\n      \"questionNumber\": 3,\n      \"questionText\": \"Explain the Two-Nation Theory and its significance.\",\n      \"questionType\": \"PARAGRAPH\",\n      \"marks\": 10,\n      \"keyConcepts\": [\"Allama Iqbal\", \"Muhammad Ali Jinnah\", \"Muslims\", \"Hindus\", \"separate nation\", \"Pakistan\"],\n      \"rubric\": \"Answer should explain the theory and mention key figures\"\n    },\n    {\n      \"questionNumber\": 4,\n      \"questionText\": \"Describe the role of Allama Iqbal in Pakistan Movement.\",\n      \"questionType\": \"PARAGRAPH\",\n      \"marks\": 10,\n      \"keyConcepts\": [\"poet\", \"philosopher\", \"Allahabad Address\", \"1930\", \"separate Muslim state\"],\n      \"rubric\": \"Answer should mention Allahabad Address and vision\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/exam/management",
+              "host": ["{{baseUrl}}"],
+              "path": ["exam", "management"]
+            }
+          }
+        },
+        {
+          "name": "Get All Exams",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/exam/management?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["exam", "management"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "subject",
+                  "value": "Pakistan Studies",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get My Exams",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/exam/management/my-exams?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["exam", "management", "my-exams"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Exam by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/exam/management/{{examId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["exam", "management", "{{examId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Exam",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Exam Title\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/exam/management/{{examId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["exam", "management", "{{examId}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Exam",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/exam/management/{{examId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["exam", "management", "{{examId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Exam Submission",
+      "item": [
+        {
+          "name": "Submit Exam Paper",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "examId",
+                  "value": "{{examId}}",
+                  "type": "text"
+                },
+                {
+                  "key": "examPaper",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/exam/submission",
+              "host": ["{{baseUrl}}"],
+              "path": ["exam", "submission"]
+            }
+          }
+        },
+        {
+          "name": "Get My Submissions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/exam/submission/my-submissions?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["exam", "submission", "my-submissions"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Submission by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/exam/submission/{{submissionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["exam", "submission", "{{submissionId}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Submissions by Exam",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/exam/submission/exam/{{examId}}?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["exam", "submission", "exam", "{{examId}}"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Student Statistics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/exam/submission/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["exam", "submission", "stats"]
+            }
+          }
+        },
+        {
+          "name": "Retry Failed Submission",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/exam/submission/{{submissionId}}/retry",
+              "host": ["{{baseUrl}}"],
+              "path": ["exam", "submission", "{{submissionId}}", "retry"]
+            }
+          }
+        },
+        {
+          "name": "Delete Submission",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/exam/submission/{{submissionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["exam", "submission", "{{submissionId}}"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

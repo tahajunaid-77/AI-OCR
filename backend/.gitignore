@@ -1,0 +1,12 @@
+node_modules
+
+dist
+
+.env.development
+.env.production
+.env.test
+.env
+
+backend/.env
+.env
+*.env
